@@ -1,0 +1,22 @@
+{
+  "name": "overlay-manager",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "dist/overlay-manager.js",
+  "source": "src/overlay-manager.ts",
+  "module": "dist/overlay-manager.modern.module.js",
+  "types": "dist/overlay-manager.d.ts",
+  "scripts": {
+    "dist": "microbundle --no-sourcemap",
+    "prepublish": "npm run dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "microbundle": "^0.15.1",
+    "nanostores": "^0.7.0",
+    "typescript": "^4.8.3"
+  }
+}
