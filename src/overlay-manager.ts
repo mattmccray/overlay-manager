@@ -6,7 +6,7 @@ export interface IOverlayOptions {
   escCloses?: boolean
 }
 
-export interface IOverlay<T = any, O = any> {
+export interface IOverlay<T = any, O = IOverlayOptions> {
   id: string
   isTopmost: ReadableAtom<boolean>
   returnValue: (value: T, error?: any) => void
@@ -30,7 +30,7 @@ export function createOverlayManager<O = IOverlayOptions>(name: string, cancelRe
     const isTopmost = computed(topmost, (dlg) => dlg?.id === id)
     const [deferred_value, deferred_ctrl] = createDeferred<T>()
 
-    const new_overlay: IOverlay = {
+    const new_overlay: IOverlay<any, any> = {
       id, view, params, options, isTopmost, returnValue, onRequestClose
     }
 
@@ -63,7 +63,7 @@ export function createOverlayManager<O = IOverlayOptions>(name: string, cancelRe
 
   function handleEsc(e: KeyboardEvent) {
     const overlay = topmost.get();
-    if (!overlay) return
+    if (!overlay || overlay.options?.escCloses == false) return
     overlay.returnValue(null, cancelReason)
   }
 }
